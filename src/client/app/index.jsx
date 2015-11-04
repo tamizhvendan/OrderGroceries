@@ -19,7 +19,7 @@ let app = <App>
     <Hero backgroundImage="public/img/hero-bg-01.jpg"
         className="text-center">
         <h1 className="display-1"> Order Groceries from your own comfort</h1>
-        <p className="lead">Add item -> Select Store -> Place Order -> Relax</p>
+        <p className="lead">Add item(s) -> Select Store -> Place Order -> Relax</p>
         <p>
           <Button bsStyle="primary">Let's start</Button>
         </p>
