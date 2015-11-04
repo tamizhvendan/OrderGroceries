@@ -1,0 +1,11 @@
+{
+  "rethinkdb" : {
+    "host" : "docker",
+    "port" : 32769,
+    "authkey" : "",
+    "db" : "OrderGroceriesDev"
+  },
+  "express" : {
+    "port" : 3000
+  }
+}
