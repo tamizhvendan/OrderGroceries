@@ -4,6 +4,7 @@ var path = require('path');
 var r = require('rethinkdb');
 require('rethinkdb-init')(r);
 var config = require('config');
+var rethinkdbConfig = config.get('rethinkdb');
 var publicPath = path.resolve(__dirname, '../client/public');
 
 app.use('/public', express.static(publicPath));
@@ -29,7 +30,7 @@ function startServer() {
 
 
 function createConnection(req, res, next) {
-    r.connect(config.get('rethinkdb'), function(error, conn) {
+    r.connect(rethinkdbConfig, function(error, conn) {
         if (error) {
             handleError(res, error);
         }
@@ -52,7 +53,8 @@ function handleError(res, error) {
 }
 
 console.log('initializing Rethinkdb');
-r.init(config.get('rethinkdb'), [])
+console.log(rethinkdbConfig);
+r.init(rethinkdbConfig, [])
   .then(function(conn, err){
     if (err) {
       console.log('Rethinkdb not available');

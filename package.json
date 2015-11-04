@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack -p",
     "dev": "webpack -d --watch --inline & nodemon ./src/server/index.js",
-    "start": "NODE_ENV=production && webpack -p && forever -o out.log -e err.log ./src/server/index.js"
+    "start": "export NODE_ENV=production && webpack -p && forever -o out.log -e err.log ./src/server/index.js"
   },
   "repository": {
     "type": "git",

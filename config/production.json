@@ -1,6 +1,6 @@
 {
   "rethinkdb" : {
-    "host" : "localhost",
+    "host" : "rethinkdb",
     "port" : 28015,
     "authkey" : "",
     "db" : "OrderGroceries"
