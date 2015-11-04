@@ -22,7 +22,7 @@ function startServer() {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('Order Groceries app listening at http://%s:%s', host, port);
   });
 }
 
@@ -51,6 +51,7 @@ function handleError(res, error) {
     return res.send(500, {error: error.message});
 }
 
+console.log('initializing Rethinkdb');
 r.init(config.get('rethinkdb'), [])
   .then(function(conn, err){
     if (err) {
@@ -58,5 +59,6 @@ r.init(config.get('rethinkdb'), [])
       console.log(err.message)
       process.exit(1);
     }
+    console.log('Rethinkdb initialized successfully');
     startServer();
   });
