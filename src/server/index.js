@@ -13,7 +13,7 @@ app.use('/public', express.static(publicPath));
 app.use(createConnection);
 app.use(closeConnection);
 
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
