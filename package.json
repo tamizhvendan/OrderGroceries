@@ -35,10 +35,12 @@
     "neal-react": "^0.1.8",
     "react": "^0.14.2",
     "react-bootstrap": "^0.27.3",
+    "react-bootstrap-validation": "^0.1.8",
     "react-dom": "^0.14.2",
     "react-router": "^1.0.0",
     "rethinkdb": "^2.1.1",
-    "rethinkdb-init": "0.0.5"
+    "rethinkdb-init": "0.0.5",
+    "revalidator": "^0.3.1"
   },
   "devDependencies": {
     "css-loader": "^0.21.0",

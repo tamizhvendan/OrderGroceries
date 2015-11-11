@@ -1,6 +1,8 @@
 import React from 'react'
+import {Link} from 'react-router'
 import {Button, ButtonToolbar} from 'react-bootstrap';
 import {App, Page, Navbar, Hero, Footer} from 'neal-react';
+import RegisterStore from './grocerystore/registerGroceryStore.jsx';
 
 let brandName = "Order Groceries";
 
@@ -13,6 +15,22 @@ let businessAddress = (
 );
 
 class LandingPage extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = { showRegisterStoreForm : false }
+    this.openRegisterStore = this.openRegisterStore.bind(this);
+    this.closeRegisterStore = this.closeRegisterStore.bind(this);
+  }
+
+  openRegisterStore () {
+    this.setState({showRegisterStoreForm : true});
+  }
+
+  closeRegisterStore () {
+    this.setState({showRegisterStoreForm : false});
+  }
+
   render () {
     return (
       <Page>
@@ -25,7 +43,8 @@ class LandingPage extends React.Component{
             <p className="lead">Add item(s) -> Select Store -> Place Order -> Relax</p>
             <ButtonToolbar>
               <Button bsStyle="primary">Order Groceries</Button>
-              <Button bsStyle="success">Register Your Store</Button>
+              <Button bsStyle="success" onClick={this.openRegisterStore}>Register Your Store</Button>
+              <RegisterStore show={this.state.showRegisterStoreForm} onHide={this.closeRegisterStore}/>
             </ButtonToolbar>
         </Hero>
         <Footer brandName={brandName}
