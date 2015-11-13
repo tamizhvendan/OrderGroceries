@@ -6,7 +6,8 @@ module.exports = function(app) {
   app.post('/api/grocerystore', function(req,res){
     var newGroceryStore = req.body;
     var validationResult = revalidator.validate(newGroceryStore, groceryStoreSchema);
-    if (validationResult.isValid) {
+    console.log(validationResult);
+    if (validationResult.valid) {
       res.json(newGroceryStore);
     } else {
       var errors = validationResult.errors.reduce((errors, error) => {
