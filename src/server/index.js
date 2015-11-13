@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+
+
 var path = require('path');
 var r = require('rethinkdb');
 require('rethinkdb-init')(r);
@@ -8,7 +11,8 @@ var rethinkdbConfig = config.get('rethinkdb');
 var publicPath = path.resolve(__dirname, '../client/public');
 
 app.use('/public', express.static(publicPath));
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(createConnection);
 app.use(closeConnection);
@@ -64,3 +68,5 @@ r.init(rethinkdbConfig, [])
     console.log('Rethinkdb initialized successfully');
     startServer();
   });
+
+require('./grocerystore/register.js')(app);

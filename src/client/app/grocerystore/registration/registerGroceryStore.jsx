@@ -1,24 +1,32 @@
 import React from 'react';
 import { Modal} from 'react-bootstrap';
 import RegistrationForm from './registrationForm.jsx';
+import AltContainer from 'alt-container';
+import {store, actions} from './registrationFlux.js';
 
-class RegisterGroceryStore extends React.Component{
+class RegisterGroceryStore extends React.Component {
 
   render () {
-    return (
-      <Modal show={this.props.show} onHide={this.props.onHide} bsSize="medium">
-        <Modal.Header>
-          <Modal.Title>Register Your Store</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <RegistrationForm onCancel={this.props.onHide}/>
-        </Modal.Body>
-        <Modal.Footer>
-          <p>Registration is free for a limited time!</p>
-        </Modal.Footer>
-      </Modal>
-    );
+    if (this.props.showRegisterStoreForm) {
+      return (<RegistrationForm show={this.props.show}
+                      onSubmit={this.props.register}
+                      onHide={this.props.onHide}
+                      onCancel={this.props.onHide}
+                      backendValidationErrors={this.props.backendValidationErrors}/>);
+    } else {
+      return null;
+    }
   }
 };
 
-export default RegisterGroceryStore;
+class RegisterGroceryStoreContainer extends React.Component {
+  render() {
+    return (
+      <AltContainer store={store} actions={actions}>
+        <RegisterGroceryStore onHide={this.props.onHide} show={this.props.show}/>
+      </AltContainer>
+    );
+  }
+}
+
+export default RegisterGroceryStoreContainer;

@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import {Button, ButtonToolbar} from 'react-bootstrap';
 import {App, Page, Navbar, Hero, Footer} from 'neal-react';
-import RegisterStore from './grocerystore/registration/registerGroceryStore.jsx';
+import RegisterGroceryStore from './grocerystore/registration/registerGroceryStore.jsx';
 
 let brandName = "Order Groceries";
 
@@ -44,7 +44,7 @@ class LandingPage extends React.Component{
             <ButtonToolbar>
               <Button bsStyle="primary">Order Groceries</Button>
               <Button bsStyle="success" onClick={this.openRegisterStore}>Register Your Store</Button>
-              <RegisterStore show={this.state.showRegisterStoreForm} onHide={this.closeRegisterStore}/>
+              <RegisterGroceryStore show={this.state.showRegisterStoreForm} onHide={this.closeRegisterStore}/>
             </ButtonToolbar>
         </Hero>
         <Footer brandName={brandName}
