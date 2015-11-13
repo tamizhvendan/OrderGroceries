@@ -87,7 +87,8 @@ module.exports = {
         maxLength: 'Zip Code should contain only 6 digits',
         minLength: 'Zip Code should contain only 6 digits',
         required : 'Zip Code should not be empty',
-        allowEmpty : 'Zip Code should not be empty'
+        allowEmpty : 'Zip Code should not be empty',
+        pattern : 'Invalid Zip Code'
       }
     },
     mobile : {
@@ -101,7 +102,8 @@ module.exports = {
         maxLength: 'Mobile Number should contain only 6 digits',
         minLength: 'Mobile Number should contain only 6 digits',
         required : 'Mobile Number should not be empty',
-        allowEmpty : 'Mobile Number should not be empty'
+        allowEmpty : 'Mobile Number should not be empty',
+        pattern : 'Invalid Mobile Number'
       }
     }
   }

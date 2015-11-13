@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import {Button, ButtonToolbar} from 'react-bootstrap';
 import {App, Page, Navbar, Hero, Footer} from 'neal-react';
-import RegisterStore from './grocerystore/registerGroceryStore.jsx';
+import RegisterStore from './grocerystore/registration/registerGroceryStore.jsx';
 
 let brandName = "Order Groceries";
 

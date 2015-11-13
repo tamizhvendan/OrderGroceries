@@ -6,7 +6,7 @@ class RegisterGroceryStore extends React.Component{
 
   render () {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide} bsSize="medium" autoFocus={true}>
+      <Modal show={this.props.show} onHide={this.props.onHide} bsSize="medium">
         <Modal.Header>
           <Modal.Title>Register Your Store</Modal.Title>
         </Modal.Header>
