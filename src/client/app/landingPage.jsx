@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
-import {Button, ButtonToolbar} from 'react-bootstrap';
-import {App, Page, Navbar, Hero, Footer, NavBrand} from 'neal-react';
+import {Button, ButtonToolbar, NavBrand} from 'react-bootstrap';
+import {App, Page, Navbar, Hero, Footer} from 'neal-react';
 import RegisterGroceryStore from './grocerystore/registration/registerGroceryStore.jsx';
 
 let brandName = "Order Groceries";
@@ -34,7 +34,7 @@ class LandingPage extends React.Component{
   render () {
     return (
       <Page>
-        <Navbar>
+        <Navbar brand="Order Groceries">
           <NavBrand><img src="public/img/OG_LOGO.png"/></NavBrand>
         </Navbar>
         <Hero backgroundImage="public/img/hero-bg-01.jpg"
