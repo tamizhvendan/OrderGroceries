@@ -30,6 +30,7 @@
   "dependencies": {
     "alt": "^0.17.8",
     "alt-container": "^1.0.0",
+    "auth0": "^0.8.2",
     "axios": "^0.7.0",
     "body-parser": "^1.14.1",
     "config": "^1.16.0",

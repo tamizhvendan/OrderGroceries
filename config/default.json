@@ -7,5 +7,10 @@
   },
   "express" : {
     "port" : 3000
+  },
+  "auth0" : {
+    "domain" : "tamizhvendan.auth0.com",
+    "clientID" : "h9hzOV01cSpZZD76GikLJlccvSLrncbi",
+    "connection" : "Username-Password-Authentication"
   }
 }
