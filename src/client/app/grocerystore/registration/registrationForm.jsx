@@ -51,8 +51,19 @@ class RegistrationForm extends React.Component {
     this.refs[fields[0]].getInputDOMNode().focus();
   }
 
-  render () {
+  onSubmit(args) {
+    if (this.props.isRegistrationInProgress) {
+      return;
+    } else {
+      this.props.onSubmit(args);
+    }
+  }
 
+  render () {
+    let registerLabel = "Register"
+    if (this.props.isRegistrationInProgress) {
+        registerLabel = "Please wait...";
+    }
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize="medium">
         <Modal.Header>
@@ -60,7 +71,7 @@ class RegistrationForm extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <MyForm validateAll={this.validateAll}
-              onValidSubmit={this.props.onSubmit}
+              onValidSubmit={this.onSubmit.bind(this)}
               backendValidationErrors={this.props.backendValidationErrors}
               handleBackendValidationErrors={this.handleBackendValidationErrors.bind(this)}>
             <ValidatedInput type='text' label='Store Name' name='storeName' ref='storeName' bsSize="small" autoFocus/>
@@ -73,7 +84,7 @@ class RegistrationForm extends React.Component {
             <ValidatedInput type='text' label='Mobile Number' name='mobile' ref='mobile'/>
             <Row>
                 <Col xs={3} xsOffset={4}>
-                  <ButtonInput type='submit' bsStyle='primary' value='Register' />
+                  <ButtonInput type='submit' bsStyle='primary' value={registerLabel} />
                 </Col>
                 <Col xs={3} xsOffset={1}>
                   <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.props.onCancel}/>

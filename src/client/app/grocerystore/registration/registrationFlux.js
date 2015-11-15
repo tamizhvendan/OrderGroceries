@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class RegistrationActions {
     register(args){
-
+      this.actions.registrationInProgress();
       return (dispatch) => {
         axios
           .post('/api/grocerystore', args)
@@ -11,7 +11,13 @@ class RegistrationActions {
           .catch(res => dispatch(res))
       }
     }
+
+    registrationInProgress() {
+      this.dispatch();
+    }
 }
+
+
 
 export const actions = alt.createActions(RegistrationActions);
 
@@ -20,15 +26,27 @@ class RegistrationStore {
       this.bindActions(actions);
       this.state = {
         showRegisterStoreForm : true,
-        backendValidationErrors : {}
+        backendValidationErrors : {},
+        isRegistrationInProgress : false
       }
     }
     register(registrationResponse) {
+
       if (registrationResponse.status === 200) {
-        this.setState({showRegisterStoreForm : false });
+        this.setState({
+          showRegisterStoreForm : false,
+          isRegistrationInProgress : false
+        });
       } else if (registrationResponse.status === 400){
-        this.setState({backendValidationErrors : registrationResponse.data});
+        this.setState({
+          backendValidationErrors : registrationResponse.data,
+          isRegistrationInProgress : false
+        });
       }
+    }
+
+    registrationInProgress() {
+      this.setState({isRegistrationInProgress : true, backendValidationErrors : []})
     }
 }
 

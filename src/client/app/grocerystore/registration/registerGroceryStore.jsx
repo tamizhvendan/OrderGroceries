@@ -12,7 +12,8 @@ class RegisterGroceryStore extends React.Component {
                       onSubmit={this.props.register}
                       onHide={this.props.onHide}
                       onCancel={this.props.onHide}
-                      backendValidationErrors={this.props.backendValidationErrors}/>);
+                      backendValidationErrors={this.props.backendValidationErrors}
+                      isRegistrationInProgress={this.props.isRegistrationInProgress}/>);
     } else {
       return null;
     }
