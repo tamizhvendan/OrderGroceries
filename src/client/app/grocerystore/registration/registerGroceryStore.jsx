@@ -8,10 +8,10 @@ class RegisterGroceryStore extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (Object.keys(newProps.user).length) {
-      this.props.onSuccess(newProps.user);
+      this.newProps.onSuccess(newProps.user);
     }
     if (newProps.isRegistrationFailed) {
-      this.props.OnFailure();
+      this.newProps.OnFailure();
     }
   }
 

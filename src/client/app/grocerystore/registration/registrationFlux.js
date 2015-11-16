@@ -11,8 +11,9 @@ class RegistrationActions {
           .catch(res => {
             if (res.status === 400) {
               this.actions.registraionValidationFailed(res.data)
+            } else {
+              this.actions.registrationFailed(res.data)
             }
-            this.actions.registrationFailed(res.data)
           })
       }
     }
@@ -64,7 +65,6 @@ class RegistrationStore {
           isRegistrationFailed : true,
           isRegistrationInProgress : false,
         })
-      }
     }
 
     registrationInProgress() {
