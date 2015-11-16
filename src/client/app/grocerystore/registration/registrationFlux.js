@@ -7,46 +7,73 @@ class RegistrationActions {
       return (dispatch) => {
         axios
           .post('/api/grocerystore', args)
-          .then(res => dispatch(res))
-          .catch(res => dispatch(res))
+          .then(res => this.actions.registrationSuccess(res.data))
+          .catch(res => {
+            if (res.status === 400) {
+              this.actions.registraionValidationFailed(res.data)
+            }
+            this.actions.registrationFailed(res.data)
+          })
       }
     }
 
+    registraionValidationFailed(err) {
+      this.dispatch(err);
+    }
+    registrationFailed(err) {
+      this.dispatch(err);
+    }
+    registrationSuccess(user) {
+      this.dispatch(user);
+    }
     registrationInProgress() {
       this.dispatch();
     }
+
 }
-
-
 
 export const actions = alt.createActions(RegistrationActions);
 
 class RegistrationStore {
     constructor(){
-      this.bindActions(actions);
       this.state = {
-        showRegisterStoreForm : true,
         backendValidationErrors : {},
-        isRegistrationInProgress : false
+        isRegistrationInProgress : false,
+        user : {},
+        isRegistrationFailed : false
       }
+      this.bindActions(actions);
     }
-    register(registrationResponse) {
 
-      if (registrationResponse.status === 200) {
+    registrationSuccess(user) {
+      this.setState({
+        user : user,
+        isRegistrationInProgress : false
+      });
+    }
+
+    registraionValidationFailed(err) {
+      this.setState({
+        backendValidationErrors : err,
+        isRegistrationInProgress : false
+      });
+    }
+
+    registrationFailed (res) {
         this.setState({
-          showRegisterStoreForm : false,
-          isRegistrationInProgress : false
-        });
-      } else if (registrationResponse.status === 400){
-        this.setState({
-          backendValidationErrors : registrationResponse.data,
-          isRegistrationInProgress : false
-        });
+          isRegistrationFailed : true,
+          isRegistrationInProgress : false,
+        })
       }
     }
 
     registrationInProgress() {
-      this.setState({isRegistrationInProgress : true, backendValidationErrors : []})
+      this.setState({
+        isRegistrationInProgress : true,
+        backendValidationErrors : [],
+        user: {},
+        isRegistrationFailed : false
+      })
     }
 }
 

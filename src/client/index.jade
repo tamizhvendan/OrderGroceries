@@ -1,0 +1,15 @@
+html
+  head
+    meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", charset="utf-8")
+    title!= title
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
+    link(rel="stylesheet",href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css")
+    link(rel="stylesheet",href="public/css/animate.css")
+  body
+    div#app
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+    script(src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js")
+    script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js")
+    script(src="//cdn.auth0.com/js/lock-7.9.min.js")
+    script!= javascript
+    script(src="public/bundle.js")

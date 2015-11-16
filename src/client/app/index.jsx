@@ -4,7 +4,8 @@ import { Router, Route, IndexRoute } from 'react-router';
 import LandingPage from './landingPage.jsx';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-class App extends React.Component {
+
+class App extends React.Component {  
   render () {
     return <div>{this.props.children}</div>;
   }
@@ -13,7 +14,7 @@ class App extends React.Component {
 const router = (
   <Router history={createBrowserHistory()}>
     <Route path="/" component={App}>
-      <IndexRoute component={LandingPage} />      
+      <IndexRoute component={LandingPage} />
     </Route>
   </Router>
 );

@@ -3,7 +3,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var config = require('config');
 var rethinkdb = require('./rethinkdbInit.js');
-var app = express();
+var expressExpose = require('express-expose');
+var app = expressExpose(express());
 
 var publicPath = path.resolve(__dirname, '../client/public');
 
@@ -12,9 +13,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-
+app.set('views', path.resolve(__dirname, '../client'));
+app.set('view engine', 'jade');
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../client/index.html'));
+  var clientConfig = {};
+  var auth0Config = config.get('auth0');
+  clientConfig.auth0 = {clientID : auth0Config.clientID, domain : auth0Config.domain};
+  res.expose(clientConfig,'config');
+  res.render('index', {title : 'Order Groceries'});
 });
 
 

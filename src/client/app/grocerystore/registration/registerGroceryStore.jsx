@@ -6,17 +6,24 @@ import {store, actions} from './registrationFlux.js';
 
 class RegisterGroceryStore extends React.Component {
 
+  componentWillReceiveProps(newProps) {
+    if (Object.keys(newProps.user).length) {
+      this.props.onSuccess(newProps.user);
+    }
+    if (newProps.isRegistrationFailed) {
+      this.props.OnFailure();
+    }
+  }
+
   render () {
-    if (this.props.showRegisterStoreForm) {
+
       return (<RegistrationForm show={this.props.show}
                       onSubmit={this.props.register}
                       onHide={this.props.onHide}
                       onCancel={this.props.onHide}
                       backendValidationErrors={this.props.backendValidationErrors}
-                      isRegistrationInProgress={this.props.isRegistrationInProgress}/>);
-    } else {
-      return null;
-    }
+                      isRegistrationInProgress={this.props.isRegistrationInProgress}
+                      />);
   }
 };
 
@@ -24,7 +31,11 @@ class RegisterGroceryStoreContainer extends React.Component {
   render() {
     return (
       <AltContainer store={store} actions={actions}>
-        <RegisterGroceryStore onHide={this.props.onHide} show={this.props.show}/>
+        <RegisterGroceryStore
+            onHide={this.props.onHide}
+            show={this.props.show}
+            onSuccess={this.props.onSuccess}
+            onFailure={this.props.onFailure}/>
       </AltContainer>
     );
   }

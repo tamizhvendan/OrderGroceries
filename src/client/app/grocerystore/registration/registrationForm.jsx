@@ -64,34 +64,39 @@ class RegistrationForm extends React.Component {
     if (this.props.isRegistrationInProgress) {
         registerLabel = "Please wait...";
     }
+    let form = (
+      <MyForm validateAll={this.validateAll}
+          onValidSubmit={this.onSubmit.bind(this)}
+          backendValidationErrors={this.props.backendValidationErrors}
+          handleBackendValidationErrors={this.handleBackendValidationErrors.bind(this)}>
+        <ValidatedInput type='text' label='Store Name' name='storeName' ref='storeName' bsSize="small" autoFocus/>
+        <ValidatedInput type='text' label='Email' name='email' ref='email' wrapperClassName="small" />
+        <ValidatedInput type='password' label='Password' name='password' ref='password'/>
+        <ValidatedInput type='password' label='Confirm Password' name='confirmPassword' ref='confirmPassword'/>
+        <ValidatedInput type='text' label='Address Line 1' name='addressLine1' ref='addressLine1'/>
+        <ValidatedInput type='text' label='Address Line 2' name='addressLine2' ref='addressLine2'/>
+        <ValidatedInput type='text' label='Zip Code' name='zipCode' ref='zipCode'/>
+        <ValidatedInput type='text' label='Mobile Number' name='mobile' ref='mobile'/>
+        <Row>
+            <Col xs={3} xsOffset={4}>
+              <ButtonInput type='submit' bsStyle='primary' value={registerLabel} />
+            </Col>
+            <Col xs={3} xsOffset={1}>
+              <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.props.onCancel}/>
+            </Col>
+        </Row>
+      </MyForm>
+    );
+    if (this.props.isRegistrationFailed) {
+      form = <p>Registration Failed</p>
+    }
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize="medium">
         <Modal.Header>
           <Modal.Title>Register Your Store</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <MyForm validateAll={this.validateAll}
-              onValidSubmit={this.onSubmit.bind(this)}
-              backendValidationErrors={this.props.backendValidationErrors}
-              handleBackendValidationErrors={this.handleBackendValidationErrors.bind(this)}>
-            <ValidatedInput type='text' label='Store Name' name='storeName' ref='storeName' bsSize="small" autoFocus/>
-            <ValidatedInput type='text' label='Email' name='email' ref='email' wrapperClassName="small" />
-            <ValidatedInput type='password' label='Password' name='password' ref='password'/>
-            <ValidatedInput type='password' label='Confirm Password' name='confirmPassword' ref='confirmPassword'/>
-            <ValidatedInput type='text' label='Address Line 1' name='addressLine1' ref='addressLine1'/>
-            <ValidatedInput type='text' label='Address Line 2' name='addressLine2' ref='addressLine2'/>
-            <ValidatedInput type='text' label='Zip Code' name='zipCode' ref='zipCode'/>
-            <ValidatedInput type='text' label='Mobile Number' name='mobile' ref='mobile'/>
-            <Row>
-                <Col xs={3} xsOffset={4}>
-                  <ButtonInput type='submit' bsStyle='primary' value={registerLabel} />
-                </Col>
-                <Col xs={3} xsOffset={1}>
-                  <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.props.onCancel}/>
-                </Col>
-            </Row>
-
-          </MyForm>
+          {form}
         </Modal.Body>
         <Modal.Footer>
           <p>Registration is free for a limited time!</p>

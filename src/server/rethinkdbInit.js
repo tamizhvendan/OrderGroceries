@@ -18,7 +18,7 @@ function createConnection(req, res, next) {
 }
 
 function handleError(res, error) {
-    return res.send(500, {error: error.message});
+    return res.status(500).json({error: error.message});
 }
 
 function closeConnection(req, res, next) {
