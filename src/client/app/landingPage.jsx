@@ -47,7 +47,7 @@ class LandingPage extends React.Component{
   }
 
   notifyRegistrationFailure() {
-    this.setState({showRegisterStoreForm : false});
+    this.closeRegisterStore();
     this.refs.container.failure(
       "Registration Failure",
       "An unexpected error has happened", {
@@ -59,7 +59,7 @@ class LandingPage extends React.Component{
   }
 
   notifyRegistrationSuccess(user) {
-    this.setState({showRegisterStoreForm : false});
+    this.closeRegisterStore();
     this.refs.container.success(
       "Registration Success",
       "Get ready to receive orders!", {

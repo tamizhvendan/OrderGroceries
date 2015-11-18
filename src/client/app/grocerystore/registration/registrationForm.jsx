@@ -29,7 +29,7 @@ class RegistrationForm extends React.Component {
     super(props);
     this.validateAll = this.validateAll.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onCancel = this.onCancel.bind(this);
+    this.onHide = this.onHide.bind(this);
   }
 
 
@@ -53,7 +53,7 @@ class RegistrationForm extends React.Component {
               <ButtonInput type='submit' bsStyle='primary' value={registerButtonLabel} />
             </Col>
             <Col xs={3} xsOffset={1}>
-              <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.onCancel}/>
+              <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.onHide}/>
             </Col>
         </Row>
       </MyForm>
@@ -81,7 +81,7 @@ class RegistrationForm extends React.Component {
     this.refs[fields[0]].getInputDOMNode().focus();
   }
 
-  onCancel() {
+  onHide() {
     this.props.onHide();
   }
 
@@ -93,14 +93,14 @@ class RegistrationForm extends React.Component {
     }
   }
 
-  render () {
+  get registrationFormModal() {
     let registerButtonLabel = "Register"
     if (this.props.isRegistrationInProgress) {
         registerButtonLabel = "Please wait...";
     }
     return (
       <Modal show={this.props.showRegisterStoreForm}
-              onHide={this.props.onHide}
+              onHide={this.onHide}
               bsSize="medium"
               keyboard={false}
               backdrop="static"
@@ -116,6 +116,10 @@ class RegistrationForm extends React.Component {
         </Modal.Footer>
       </Modal>
     );
+  }
+
+  render () {
+      return this.registrationFormModal;
   }
 }
 

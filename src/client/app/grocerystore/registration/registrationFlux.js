@@ -31,19 +31,24 @@ class RegistrationActions {
       this.dispatch();
     }
 
+
 }
 
 export const actions = alt.createActions(RegistrationActions);
 
 class RegistrationStore {
     constructor(){
+      this.initState();
+      this.bindActions(actions);
+    }
+
+    initState() {
       this.state = {
         backendValidationErrors : {},
         isRegistrationInProgress : false,
         user : {},
         isRegistrationFailed : false
       }
-      this.bindActions(actions);
     }
 
     registrationSuccess(user) {
