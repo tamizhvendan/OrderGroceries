@@ -2,7 +2,7 @@ import alt from '../../alt';
 import axios from 'axios';
 
 class RegistrationActions {
-    register(args){
+    onSubmit(args){
       this.actions.registrationInProgress();
       return (dispatch) => {
         axios

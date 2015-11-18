@@ -83,7 +83,7 @@ class LandingPage extends React.Component{
             <ButtonToolbar>
               <Button bsStyle="primary" onClick={this.showLogin}>Order Groceries</Button>
               <Button bsStyle="success" onClick={this.openRegisterStore}>Register Your Store</Button>
-              <RegisterGroceryStore show={this.state.showRegisterStoreForm}
+              <RegisterGroceryStore showRegisterStoreForm={this.state.showRegisterStoreForm}
                                     onHide={this.closeRegisterStore}
                                     onSuccess={this.notifyRegistrationSuccess}
                                     onFailure={this.notifyRegistrationFailure}/>

@@ -28,6 +28,36 @@ class RegistrationForm extends React.Component {
   constructor (props) {
     super(props);
     this.validateAll = this.validateAll.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+  }
+
+
+
+  registrationForm (registerButtonLabel) {
+    return (
+      <MyForm validateAll={this.validateAll}
+          onValidSubmit={this.onSubmit}
+          backendValidationErrors={this.props.backendValidationErrors}
+          handleBackendValidationErrors={this.handleBackendValidationErrors.bind(this)}>
+        <ValidatedInput type='text' label='Store Name' name='storeName' ref='storeName' bsSize="small" autoFocus/>
+        <ValidatedInput type='text' label='Email' name='email' ref='email' wrapperClassName="small" />
+        <ValidatedInput type='password' label='Password' name='password' ref='password'/>
+        <ValidatedInput type='password' label='Confirm Password' name='confirmPassword' ref='confirmPassword'/>
+        <ValidatedInput type='text' label='Address Line 1' name='addressLine1' ref='addressLine1'/>
+        <ValidatedInput type='text' label='Address Line 2' name='addressLine2' ref='addressLine2'/>
+        <ValidatedInput type='text' label='Zip Code' name='zipCode' ref='zipCode'/>
+        <ValidatedInput type='text' label='Mobile Number' name='mobile' ref='mobile'/>
+        <Row>
+            <Col xs={3} xsOffset={4}>
+              <ButtonInput type='submit' bsStyle='primary' value={registerButtonLabel} />
+            </Col>
+            <Col xs={3} xsOffset={1}>
+              <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.onCancel}/>
+            </Col>
+        </Row>
+      </MyForm>
+    );
   }
 
   validateAll (values) {
@@ -51,6 +81,10 @@ class RegistrationForm extends React.Component {
     this.refs[fields[0]].getInputDOMNode().focus();
   }
 
+  onCancel() {
+    this.props.onHide();
+  }
+
   onSubmit(args) {
     if (this.props.isRegistrationInProgress) {
       return;
@@ -60,43 +94,22 @@ class RegistrationForm extends React.Component {
   }
 
   render () {
-    let registerLabel = "Register"
+    let registerButtonLabel = "Register"
     if (this.props.isRegistrationInProgress) {
-        registerLabel = "Please wait...";
-    }
-    let form = (
-      <MyForm validateAll={this.validateAll}
-          onValidSubmit={this.onSubmit.bind(this)}
-          backendValidationErrors={this.props.backendValidationErrors}
-          handleBackendValidationErrors={this.handleBackendValidationErrors.bind(this)}>
-        <ValidatedInput type='text' label='Store Name' name='storeName' ref='storeName' bsSize="small" autoFocus/>
-        <ValidatedInput type='text' label='Email' name='email' ref='email' wrapperClassName="small" />
-        <ValidatedInput type='password' label='Password' name='password' ref='password'/>
-        <ValidatedInput type='password' label='Confirm Password' name='confirmPassword' ref='confirmPassword'/>
-        <ValidatedInput type='text' label='Address Line 1' name='addressLine1' ref='addressLine1'/>
-        <ValidatedInput type='text' label='Address Line 2' name='addressLine2' ref='addressLine2'/>
-        <ValidatedInput type='text' label='Zip Code' name='zipCode' ref='zipCode'/>
-        <ValidatedInput type='text' label='Mobile Number' name='mobile' ref='mobile'/>
-        <Row>
-            <Col xs={3} xsOffset={4}>
-              <ButtonInput type='submit' bsStyle='primary' value={registerLabel} />
-            </Col>
-            <Col xs={3} xsOffset={1}>
-              <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.props.onCancel}/>
-            </Col>
-        </Row>
-      </MyForm>
-    );
-    if (this.props.isRegistrationFailed) {
-      form = <p>Registration Failed</p>
+        registerButtonLabel = "Please wait...";
     }
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide} bsSize="medium">
-        <Modal.Header>
+      <Modal show={this.props.showRegisterStoreForm}
+              onHide={this.props.onHide}
+              bsSize="medium"
+              keyboard={false}
+              backdrop="static"
+              animation={false}>
+        <Modal.Header closeButton={true}>
           <Modal.Title>Register Your Store</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {form}
+          {this.registrationForm(registerButtonLabel)}
         </Modal.Body>
         <Modal.Footer>
           <p>Registration is free for a limited time!</p>
