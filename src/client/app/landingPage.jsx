@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router'
 import {Button, ButtonToolbar, NavBrand} from 'react-bootstrap';
-import {App, Page, Navbar, Hero, Footer} from 'neal-react';
+import {App, Page, Navbar, Hero, Footer, NavItem} from 'neal-react';
 import RegisterGroceryStore from './grocerystore/registration/registerGroceryStore.jsx';
-import Auth0Lock from 'auth0-lock';
+
 var ReactToastr = require("react-toastr");
 var {ToastContainer} = ReactToastr;
 var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
@@ -30,12 +30,8 @@ class LandingPage extends React.Component{
     this.notifyRegistrationFailure = this.notifyRegistrationFailure.bind(this);
   }
 
-  componentWillMount () {
-      this.lock = new Auth0Lock(config.auth0.clientID, config.auth0.domain);
-  }
-
   showLogin() {
-    this.lock.show();
+    this.props.history.replaceState({}, '/login');
   }
 
   openRegisterStore () {
@@ -70,7 +66,7 @@ class LandingPage extends React.Component{
     return (
       <Page>
         <Navbar brand="Order Groceries">
-          <NavBrand><img src="public/img/OG_LOGO.png"/></NavBrand>
+          <NavItem><Link to="login" className="nav-link">Login</Link></NavItem>
         </Navbar>
         <Hero backgroundImage="public/img/hero-bg-01.jpg"
             className="text-center">
