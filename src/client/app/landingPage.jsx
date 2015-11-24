@@ -49,25 +49,21 @@ class LandingPage extends React.Component{
   notifyRegistrationFailure() {
     this.closeRegisterStore();
     this.refs.container.failure(
-      "Registration Failure",
-      "An unexpected error has happened", {
-      timeOut: 30000,
-      extendedTimeOut: 10000
+      "An unexpected error has happened",
+      "Registration Failure", {
+      timeOut: 10000,
+      extendedTimeOut: 5000
     });
-    console.log(user);
-    this.lock.show();
   }
 
   notifyRegistrationSuccess(user) {
     this.closeRegisterStore();
     this.refs.container.success(
-      "Registration Success",
-      "Get ready to receive orders!", {
-      timeOut: 30000,
-      extendedTimeOut: 10000
+      "Check your inbox to verify your email address.",
+      "Registration Success", {
+      timeOut: 10000,
+      extendedTimeOut: 5000
     });
-    console.log(user);
-    this.lock.show();
   }
 
   render () {

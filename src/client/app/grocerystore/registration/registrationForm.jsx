@@ -1,28 +1,11 @@
-import {Form,ValidatedInput} from 'react-bootstrap-validation';
+import {ValidatedInput} from 'react-bootstrap-validation';
 import groceryStoreSchema from '../../../../schema/groceryStore.js';
 import revalidator from 'revalidator';
 import React from 'react';
 import {Modal, ButtonInput, Row, Col} from 'react-bootstrap';
+import Form from '../../util/form.js';
 
-class MyForm extends Form {
-  componentWillReceiveProps(newProps) {
-    if (this.hasErrors(newProps.backendValidationErrors)) {
-      this.setState({
-        isValid : false,
-        invalidInputs : Object.assign(this.state.invalidInputs, newProps.backendValidationErrors)
-      });
-    }
-  }
-  componentDidUpdate() {
-    if (this.hasErrors(this.props.backendValidationErrors)) {
-      this.props.handleBackendValidationErrors(this.props.backendValidationErrors);
-    }
-  }
 
-  hasErrors(errors) {
-    return Object.keys(errors).length != 0;
-  }
-}
 
 class RegistrationForm extends React.Component {
   constructor (props) {
@@ -36,7 +19,7 @@ class RegistrationForm extends React.Component {
 
   registrationForm (registerButtonLabel) {
     return (
-      <MyForm validateAll={this.validateAll}
+      <Form validateAll={this.validateAll}
           onValidSubmit={this.onSubmit}
           backendValidationErrors={this.props.backendValidationErrors}
           handleBackendValidationErrors={this.handleBackendValidationErrors.bind(this)}>
@@ -56,7 +39,7 @@ class RegistrationForm extends React.Component {
               <ButtonInput type='button' bsStyle='default' value='Cancel' onClick={this.onHide}/>
             </Col>
         </Row>
-      </MyForm>
+      </Form>
     );
   }
 
@@ -71,6 +54,7 @@ class RegistrationForm extends React.Component {
         errors[error.property] = error.message;
         return errors;
     }, {});
+
     let fields = Object.keys(errors);
     this.refs[fields[0]].getInputDOMNode().focus();
     return errors;
