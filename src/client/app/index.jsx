@@ -5,27 +5,21 @@ import LandingPage from './landingPage.jsx';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import Login from './login.jsx';
 import Auth0Lock from 'auth0-lock';
+import StoreHome from './grocerystore/home.jsx';
+import auth from './auth.js'
 
 class App extends React.Component {
   componentWillMount () {
     this.lock = new Auth0Lock(config.auth0.clientID, config.auth0.domain);
-    this.setState({idToken: this.getIdToken()});
-  }
-
-  getIdToken() {
-    let idToken = localStorage.getItem('userToken');
     let authHash = this.lock.parseHash(window.location.hash);
-    if (!idToken && authHash) {
-      if (authHash.id_token) {
-        idToken = authHash.id_token
-        localStorage.setItem('userToken', authHash.id_token);
-      }
-      if (authHash.error) {
-        console.log("Error signing in", authHash);
-        return null;
-      }
+    if (authHash && authHash.id_token) {
+      auth.login(authHash.id_token);
     }
-    return idToken;
+    let token = auth.getIdToken();
+    if (!!token) {
+      this.setState({idToken: token});
+      this.props.history.replaceState({}, '/store-home');
+    }
   }
 
   render () {
@@ -33,11 +27,14 @@ class App extends React.Component {
   }
 }
 
+
+
 const router = (
   <Router history={createBrowserHistory()}>
     <Route path="/" component={App}>
       <IndexRoute component={LandingPage} />
       <Route path="login" component={Login} name="login"/>
+      <Route path="store-home" component={StoreHome} name="storeHome" onEnter={auth.requireAuth}/>
     </Route>
   </Router>
 );
